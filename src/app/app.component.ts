@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { DashboardComponent } from './features/dashboard/dashboard.component';
+import { MoviesListComponent } from './features/movies-list/movies-list.component';
 
 @Component({
   selector: 'app-root',
@@ -8,5 +10,5 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'movie-awards-app';
+  name = 'movie-awards-app';
 }

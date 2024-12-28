@@ -1,5 +1,9 @@
 FROM node:18 AS build
 
+ENV PATH="node_modules/.bin:$PATH"
+
+RUN apt update
+
 WORKDIR /app
 
 COPY package*.json ./

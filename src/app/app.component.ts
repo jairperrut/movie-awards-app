@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { DashboardComponent } from './features/dashboard/dashboard.component';
-import { MoviesListComponent } from './features/movies-list/movies-list.component';
+import { RouterModule } from '@angular/router';
+import { NavbarComponent } from './shared/components/navbar/navbar.component';
+import { HeaderComponent } from './shared/components/header/header.component';
+
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  standalone: true,
+  imports: [RouterModule, NavbarComponent, HeaderComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
-  name = 'movie-awards-app';
-}
+export class AppComponent {}

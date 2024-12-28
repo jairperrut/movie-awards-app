@@ -1,0 +1,63 @@
+<div class="container mt-4">
+    <h2>List movies</h2>
+  
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>
+              Year
+              <br />
+              <input
+                type="number"
+                class="form-control form-control-sm"
+                placeholder="Filter by year"
+                [(ngModel)]="filters.year"
+                (ngModelChange)="applyFilters()"
+              />
+            </th>
+            <th>Title</th>
+            <th>
+              Winner?
+              <br />
+              <select
+                class="form-control form-control-sm"
+                [(ngModel)]="filters.winner"
+                (ngModelChange)="applyFilters()"
+              >
+                <option value="">Yes/No</option>
+                <option [value]="true">Yes</option>
+                <option [value]="false">No</option>
+              </select>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let movie of movies">
+            <td>{{ movie.id }}</td>
+            <td>{{ movie.year }}</td>
+            <td>{{ movie.title }}</td>
+            <td>{{ movie.winner ? 'Yes' : 'No' }}</td>
+          </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th colspan="4">
+                    <div class="pagination">
+                        <button [class.disabled]="currentPage === 0" (click)="onPageChange(0)">
+                            &laquo;
+                        </button>
+                        <button [class.disabled]="currentPage === 0" (click)="onPageChange(currentPage - 1)">
+                            &lsaquo;
+                        </button>
+                        <button *ngFor="let page of [].constructor(totalPages); let i = index" [class.active]="currentPage === i" (click)="onPageChange(i)">{{ i + 1 }}</button>
+                        <button [class.disabled]="currentPage + 1 === totalPages" (click)="onPageChange(currentPage + 1)">&rsaquo;</button>
+                        <button [class.disabled]="currentPage + 1 === totalPages" (click)="onPageChange(totalPages - 1)">&raquo;</button>
+                    </div>
+                </th>
+            </tr>
+        </tfoot>
+      </table>
+    </div>
+</div>  

@@ -1,0 +1,28 @@
+.navbar {
+  background-color: #f4f4f4;
+  min-width: 200px;
+  height: 100%;
+  align-items: self-start;
+  padding: 20px;
+  
+  ul {
+    flex-direction: column;
+    list-style: none;
+    display: flex;
+
+    li {
+      margin: 10px 0;
+      a {
+        color: #333;
+        font-weight: bold;
+        text-decoration: none;
+        .active {
+          color: #007bff;
+        }
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}

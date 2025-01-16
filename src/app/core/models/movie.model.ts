@@ -1,5 +1,4 @@
-// core/models/movie.model.ts
-export interface Movie {
+  export interface Movie {
     id: number;
     year: number;
     title: string;
@@ -8,20 +7,11 @@ export interface Movie {
     winner: boolean;
   }
   
-  export interface YearWithMultipleWinners {
-    year: number;
-    winnerCount: number;
-  }
-  
-  export interface StudioWinCount {
-    name: string;
-    winCount: number;
-  }
-  
-  export interface ProducerWinInterval {
-    producer: string;
-    interval: number;
-    previousWin: number;
-    followingWin: number;
+  export interface PaginatedResponse<T> {
+    content: T[];
+    totalElements: number;
+    totalPages: number;
+    number: number;
+    size: number;
   }
   

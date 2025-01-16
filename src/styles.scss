@@ -1,0 +1,19 @@
+/* Importando tema padrão do Angular Material */
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
+
+/* Resetando margens e padding */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Estilos globais */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+}
+
+h2 {
+  color: #3f51b5;
+}

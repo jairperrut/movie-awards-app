@@ -24,7 +24,7 @@ Esta aplicação Angular foi desenvolvida utilizando Clean Architecture e DDD (D
    ```
 
 2. **Acesso**:
-   O projeto estará disponível em `http://localhost:4200`.
+   O projeto estará disponível em `http://localhost:8888`.
 
 ## Funcionalidades Principais
 

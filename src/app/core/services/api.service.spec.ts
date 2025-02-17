@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { HttpClientModule } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { ApiService } from './api.service';
 
@@ -8,9 +9,10 @@ describe('ApiService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [HttpClientModule],
       providers: [
         ApiService,
-        provideHttpClientTesting(), // Substitui HttpClientTestingModule
+        provideHttpClientTesting(),
       ],
     });
 
@@ -33,7 +35,7 @@ describe('ApiService', () => {
       expect(data).toEqual(dummyData);
     });
 
-    const req = httpMock.expectOne('http://localhost:3000/api/endpoint');
+    const req = httpMock.expectOne('/api/endpoint');
     expect(req.request.method).toBe('GET');
     req.flush(dummyData);
   });

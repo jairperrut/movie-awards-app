@@ -1,43 +1,93 @@
 import { TestBed } from '@angular/core/testing';
-import { of } from 'rxjs';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { ApiService } from './api.service';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { MovieService } from './movie.service';
+import { ApiService } from './api.service';
 
 describe('MovieService', () => {
   let service: MovieService;
-  let apiServiceSpy: jest.Mocked<ApiService>;
+  let httpMock: HttpTestingController;
 
   beforeEach(() => {
-    const spy = {
-      get: jest.fn()
-    }
-
     TestBed.configureTestingModule({
+      imports: [HttpClientModule],
       providers: [
         MovieService,
+        ApiService,
         provideHttpClientTesting(),
-        { provide: ApiService, useValue: spy },
       ],
     });
 
     service = TestBed.inject(MovieService);
-    apiServiceSpy = TestBed.inject(ApiService) as jest.Mocked<ApiService>
+    httpMock = TestBed.inject(HttpTestingController);
+  });
+
+  afterEach(() => {
+    httpMock.verify();
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should fetch years with multiple winners', (done) => {
-    const mockData = { years: [{ year: 1980, winnerCount: 2 }] };
-    apiServiceSpy.get.mockReturnValue(of(mockData));
+  it('should get movies with correct parameters', () => {
+    const dummyMovies = { content: [], totalElements: 0, totalPages: 0 };
+    const params = { page: 1, size: 10, year: '2022', winner: 'true' };
 
-    service.getYearsWithMultipleWinners().subscribe((data: any) => {
-      expect(data).toEqual(mockData);
-      done();
+    service.getMovies(params).subscribe((data) => {
+      expect(data).toEqual(dummyMovies);
     });
 
-    expect(apiServiceSpy.get).toHaveBeenCalledWith('years-with-multiple-winners');
+    const req = httpMock.expectOne('/api/movies?page=1&size=10&year=2022&winner=true');
+    expect(req.request.method).toBe('GET');
+    req.flush(dummyMovies);
+  });
+
+  it('should get years with multiple winners', () => {
+    const dummyData = { years: [] };
+
+    service.getYearsWithMultipleWinners().subscribe((data) => {
+      expect(data).toEqual(dummyData);
+    });
+
+    const req = httpMock.expectOne('/api/movies?projection=years-with-multiple-winners');
+    expect(req.request.method).toBe('GET');
+    req.flush(dummyData);
+  });
+
+  it('should get top studios with win count', () => {
+    const dummyData = { studios: [] };
+
+    service.getTopStudiosWithWinCount().subscribe((data) => {
+      expect(data).toEqual(dummyData);
+    });
+
+    const req = httpMock.expectOne('/api/movies?projection=studios-with-win-count');
+    expect(req.request.method).toBe('GET');
+    req.flush(dummyData);
+  });
+
+  it('should get producer intervals', () => {
+    const dummyData = { max: [], min: [] };
+
+    service.getProducerIntervals().subscribe((data) => {
+      expect(data).toEqual(dummyData);
+    });
+
+    const req = httpMock.expectOne('/api/movies?projection=max-min-win-interval-for-producers');
+    expect(req.request.method).toBe('GET');
+    req.flush(dummyData);
+  });
+
+  it('should get winners by year', () => {
+    const dummyData: any[] = [];
+
+    service.getWinnersByYear(2022).subscribe((data) => {
+      expect(data).toEqual(dummyData);
+    });
+
+    const req = httpMock.expectOne('/api/movies?year=2022&winner=true');
+    expect(req.request.method).toBe('GET');
+    req.flush(dummyData);
   });
 });

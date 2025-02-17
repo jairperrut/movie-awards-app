@@ -6,6 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: movie-awards-app
+    privileged: true
     ports:
       - "8888:80"
     restart: always    

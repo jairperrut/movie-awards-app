@@ -12,17 +12,17 @@ import { MovieService } from '../../core/services/movie.service';
   
 })
 export class MovieListComponent implements OnInit {
-  movies: any[] = []; // Lista de filmes da página atual
-  totalElements: number = 0; // Total de filmes
-  totalPages: number = 0; // Total de páginas
-  currentPage: number = 0; // Página atual
-  pageSize: number = 15; // Tamanho da página
-  filters = { year: '', winner: '' }; // Filtros de ano e vencedor
+  movies: any[] = [];
+  totalElements: number = 0;
+  totalPages: number = 0;
+  currentPage: number = 0;
+  pageSize: number = 15;
+  filters = { year: '', winner: '' };
 
   constructor(private moviesService: MovieService) {}
 
   ngOnInit(): void {
-    this.loadMovies(); // Carrega os filmes ao inicializar o componente
+    this.loadMovies();
   }
 
   /**
@@ -47,7 +47,7 @@ export class MovieListComponent implements OnInit {
    * Aplica os filtros e carrega a página 0 com os novos critérios.
    */
   applyFilters(): void {
-    this.currentPage = 0; // Reinicia para a primeira página
+    this.currentPage = 0;
     this.loadMovies();
   }
   
@@ -62,4 +62,3 @@ export class MovieListComponent implements OnInit {
     }
   }
 }
-

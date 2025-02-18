@@ -16,22 +16,22 @@ export class MovieService {
         if (params.year) httpParams = httpParams.set('year', params.year);
         if (params.winner) httpParams = httpParams.set('winner', params.winner);
     
-        return this.apiService.get<any>('/movies' , httpParams);
+        return this.apiService.get<any>('movies' , httpParams);
       }
 
     getYearsWithMultipleWinners(): Observable<any> {
-        return this.apiService.get('/movies', {'projection': 'years-with-multiple-winners'});
+        return this.apiService.get('movies', {'projection': 'years-with-multiple-winners'});
     }
 
     getTopStudiosWithWinCount(): Observable<any> {
-        return this.apiService.get('/movies', {'projection': 'studios-with-win-count'});
+        return this.apiService.get('movies', {'projection': 'studios-with-win-count'});
     }
 
     getProducerIntervals(): Observable<any> {
-        return this.apiService.get('/movies', {'projection': 'max-min-win-interval-for-producers'});
+        return this.apiService.get('movies', {'projection': 'max-min-win-interval-for-producers'});
     }
 
     getWinnersByYear(year: number): Observable<any[]> {
-        return this.apiService.get('/movies', {'year':year, 'winner': true});
+        return this.apiService.get('movies', {'year':year, 'winner': true});
     }
 }

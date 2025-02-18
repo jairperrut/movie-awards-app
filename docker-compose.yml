@@ -8,8 +8,19 @@ services:
     container_name: movie-awards-app
     ports:
       - "8888:80"
-    restart: always    
+    restart: always
     stdin_open: true
     tty: true
     environment:
       - CHOKIDAR_USEPOLLING=true
+
+  movie-awards-tests:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: build
+    container_name: movie-awards-tests
+    privileged: true
+    volumes:
+      - ./coverage:/app/coverage
+    command: ng test --code-coverage

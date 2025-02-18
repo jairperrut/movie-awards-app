@@ -20,11 +20,19 @@ Esta aplicação Angular foi desenvolvida utilizando Clean Architecture e DDD (D
 1. **Utilizando Docker Compose**:
    Suba os serviços com:
    ```bash
-   docker-compose up --build
+   docker-compose up movie-awards-app --build
    ```
 
 2. **Acesso**:
    O projeto estará disponível em `http://localhost:8888`.
+
+### Rodando os Testes com Docker
+
+1. **Utilizando Docker Compose**:
+   Execute os testes com:
+   ```bash
+   docker-compose up movie-awards-tests --build
+   ```
 
 ## Funcionalidades Principais
 

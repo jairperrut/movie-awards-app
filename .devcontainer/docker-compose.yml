@@ -9,6 +9,7 @@ services:
     #
     build:
       target: build
+    privileged: true
     ports:
       - "4200:4200"
     volumes:

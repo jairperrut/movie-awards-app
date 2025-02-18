@@ -32,7 +32,7 @@ describe('MovieService', () => {
 
   it('should get movies with correct parameters', () => {
     const dummyMovies = { content: [], totalElements: 0, totalPages: 0 };
-    const params = { page: 1, size: 10, year: '2022', winner: 'true' };
+    const params = { page: 1, size: 10, year: 2022, winner: true };
 
     service.getMovies(params).subscribe((data) => {
       expect(data).toEqual(dummyMovies);
